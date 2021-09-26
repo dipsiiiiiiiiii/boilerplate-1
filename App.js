@@ -1,5 +1,6 @@
 import React, {useReducer, useEffect, useMemo} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AuthContext from './src/contexts/AuthContext';
 import RootStackNavigator from './src/navigations/RootStackNavigator';
 import SplashScreen from './src/screens/SplashScreen';
@@ -33,7 +34,7 @@ const App = () => {
       }
 
       try {
-        await timeout(5000);
+        await timeout(2000);
         userToken = 'dummy-auth-token';
       } catch (e) {}
 
@@ -58,9 +59,11 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
-        <RootStackNavigator />
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <RootStackNavigator />
+        </NavigationContainer>
+      </SafeAreaProvider>
     </AuthContext.Provider>
   );
 };
